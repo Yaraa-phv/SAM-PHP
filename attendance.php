@@ -62,20 +62,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($row = $students->fetch_assoc()): ?>
-                            <tr class="align-middle ">
-                                <td ><?= htmlspecialchars($row['student_id']) ?></td>
-                                <td><?= htmlspecialchars($row['name']) ?></td>
-                                <td>
-                                    <select name="attendance[<?= $row['student_id'] ?>]" class="form-select" aria-label="Attendance status for <?= htmlspecialchars($row['name']) ?>">
-                                        <option value="" disabled selected>Choose</option>
-                                        <option value="Present">Present</option>
-                                        <option value="Absent">Absent</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
+    <?php while ($row = $students->fetch_assoc()): ?>
+        <tr class="align-middle ">
+            <td><?= htmlspecialchars($row['student_id']) ?></td>
+            <td><?= htmlspecialchars($row['name']) ?></td>
+            <td>
+                <select name="attendance[<?= $row['student_id'] ?>]" class="form-select present" aria-label="Attendance status for <?= htmlspecialchars($row['name']) ?>">
+                    <option value="Present" selected>Present</option>
+                    <option value="Absent">Absent</option>
+                </select>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+</tbody>
                 </table>
             </div>
             <button type="submit" class="btn btn-primary mb-5">Submit Attendance</button>
@@ -83,25 +82,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const selects = document.querySelectorAll('.form-select');
+    document.addEventListener('DOMContentLoaded', function() {
+        const selects = document.querySelectorAll('.form-select');
 
-            function updateSelectColor(select) {
-                select.classList.remove('present', 'absent');
+        function updateSelectColor(select) {
+            select.classList.remove('present', 'absent');
 
-                if (select.value === 'Present') {
-                    select.classList.add('present');
-                } else if (select.value === 'Absent') {
-                    select.classList.add('absent');
-                }
+            if (select.value === 'Present') {
+                select.classList.add('present');
+            } else if (select.value === 'Absent') {
+                select.classList.add('absent');
             }
+        }
 
-            selects.forEach(select => {
-                select.addEventListener('change', () => updateSelectColor(select));
-                updateSelectColor(select); // Set initial color
-            });
+        selects.forEach(select => {
+            select.addEventListener('change', () => updateSelectColor(select));
+            updateSelectColor(select); // Set initial color
         });
-    </script>
+    });
+</script>
 </body>
 
 </html>
