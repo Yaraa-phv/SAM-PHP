@@ -12,10 +12,12 @@ if (isset($_GET['q'])) {
     <meta charset="UTF-8">
     <title>Search Student</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<?php include 'navbar.php'; ?>
+
 <div class="container">
+    <?php include 'navbar.php'; ?>
     <h2 class="mb-4">Search Student</h2>
     <form class="row mb-4" method="get">
         <div class="col-md-6">
@@ -26,8 +28,8 @@ if (isset($_GET['q'])) {
         </div>
     </form>
     <?php if ($results !== null): ?>
-        <table class="table table-bordered">
-            <thead>
+        <table class="table table-bordered w-50">
+            <thead class="table-dark">
                 <tr>
                     <th>Student ID</th>
                     <th>Name</th>
